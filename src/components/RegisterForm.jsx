@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { getData, storeData } from "../utils/asyncStorage";
+import { register } from "../actions/auth";
 import {
   View,
   KeyboardAvoidingView,
@@ -13,7 +15,7 @@ import {
   Keyboard,
 } from "react-native";
 
-const RegisterForm = ({ navigation }) => {
+const RegisterForm = ({ navigation, register }) => {
   const initialState = {
     email: "",
     password: "",
@@ -24,25 +26,16 @@ const RegisterForm = ({ navigation }) => {
     "Le token s'affichera ici en cas de success"
   );
 
-  useEffect(() => {
-    getData("token").then((res) => setToken(res));
-  }, []);
-
   function goLogin() {
-    navigation.navigate("login");
+    navigation.navigate("Login");
   }
 
-  function register(e) {
+  function handleRegister(e) {
     e.preventDefault();
 
-    axios
-      .post("https://api.evilweb.fr/api/users/register", formData)
-      .then((res) => {
-        const { token } = res.data;
-        storeData("token", token).then(() => console.log("token synced"));
-        setToken(token);
-      })
-      .catch((e) => console.log(e));
+    formData.url = "/api/users/register";
+
+    register(formData);
   }
 
   function handleForm(e, name) {
@@ -75,7 +68,7 @@ const RegisterForm = ({ navigation }) => {
             onChangeText={(e) => handleForm(e, "passwordConfirm")}
           />
           <View style={styles.btnContainer}>
-            <Button title="Submit" onPress={(e) => register(e)} />
+            <Button title="Submit" onPress={(e) => handleRegister(e)} />
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -114,4 +107,8 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegisterForm;
+RegisterForm.propTypes = {
+  register: PropTypes.func.isRequired,
+};
+
+export default connect(null, { register })(RegisterForm);

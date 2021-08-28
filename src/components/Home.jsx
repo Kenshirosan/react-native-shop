@@ -9,25 +9,24 @@ import {
 
 const Home = ({ navigation }) => {
   function goShopping() {
-    navigation.navigate("shop");
+    navigation.navigate("Shop");
   }
   function goRegister() {
-    navigation.navigate("register");
+    navigation.navigate("Register");
   }
   function goLogin() {
-    navigation.navigate("login");
+    navigation.navigate("Login");
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>
-        Bienvenue sur la version react native de reactshop
-      </Text>
+      <Text style={styles.text}>React Native Shop !</Text>
+
       <TouchableOpacity style={styles.touchable} onPress={goShopping}>
         <Text style={styles.btn}>Voir le shop</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.touchable} onPress={goRegister}>
-        <Text style={styles.btn}>register</Text>
+        <Text style={styles.btn}>Register</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.touchable} onPress={goLogin}>
         <Text style={styles.btn}>Login</Text>
@@ -43,13 +42,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 4,
-    marginTop: 300,
+    marginTop: 150,
     alignItems: "center",
     height: "100%",
   },
   text: {
     fontSize: 24,
-    color: "orangered",
+    padding: 6,
     fontWeight: "bold",
     marginBottom: 20,
   },

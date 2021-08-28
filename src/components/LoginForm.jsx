@@ -28,7 +28,7 @@ const RegisterForm = ({ navigation }) => {
   }, []);
 
   function goRegister() {
-    navigation.navigate("register");
+    navigation.navigate("Register");
   }
 
   function login(e) {
