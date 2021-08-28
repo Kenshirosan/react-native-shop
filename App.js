@@ -1,9 +1,10 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState, Fragment } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
 
+const { Navigator, Screen } = createStackNavigator();
 import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 
 import Home from "./src/components/Home";
@@ -13,8 +14,8 @@ import Shop from "./src/components/Shop";
 import store from "./src/store";
 import { loadUser } from "./src/actions/auth";
 import { Provider } from "react-redux";
+import ProductDetail from "./src/components/ProductDetail";
 
-const { Navigator, Screen } = createStackNavigator();
 const Drawer = createDrawerNavigator();
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,6 +47,11 @@ export default function App() {
               <Drawer.Screen name="Shop" component={Shop} />
               <Drawer.Screen name="Register" component={RegisterForm} />
               <Drawer.Screen name="Login" component={LoginForm} />
+              <Screen
+                options={{ title: "Product details" }}
+                name="productDetail"
+                component={ProductDetail}
+              />
             </Drawer.Navigator>
           </NavigationContainer>
         </View>

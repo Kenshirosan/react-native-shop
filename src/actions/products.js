@@ -14,7 +14,7 @@ import { getData, storeData } from "../utils/asyncStorage";
 
 export const getProducts = () => async (dispatch) => {
   try {
-    const res = await axios.get("/api/products");
+    const res = await axios.get("https://api.evilweb.fr/api/products");
 
     dispatch({
       type: GET_PRODUCTS,
@@ -30,7 +30,7 @@ export const getProducts = () => async (dispatch) => {
 };
 export const getProduct = (id) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/products/${id}`);
+    const res = await axios.get(`https://api.evilweb.fr/api/products/${id}`);
 
     dispatch({
       type: GET_PRODUCT,
@@ -58,7 +58,10 @@ export const createProduct = (formData) => async (dispatch) => {
 
     setAuthToken(token);
 
-    const res = await axios.post("/api/products/create", formData);
+    const res = await axios.post(
+      "https://api.evilweb.fr/api/products/create",
+      formData
+    );
 
     dispatch({
       type: CREATE_PRODUCT,
@@ -77,7 +80,7 @@ export const createProduct = (formData) => async (dispatch) => {
 
 export const updateProduct = (formData) => async (dispatch) => {
   try {
-    await axios.patch("/api/products/update", formData);
+    await axios.patch("https://api.evilweb.fr/api/products/update", formData);
 
     dispatch(getProducts());
 
@@ -93,7 +96,9 @@ export const updateProduct = (formData) => async (dispatch) => {
 
 export const destroyProduct = (formData) => async (dispatch) => {
   try {
-    await axios.delete(`/api/products/destroy`, { data: formData });
+    await axios.delete(`https://api.evilweb.fr/api/products/destroy`, {
+      data: formData,
+    });
 
     dispatch(getProducts());
 
