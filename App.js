@@ -1,7 +1,11 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState, Fragment } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const { Navigator, Screen } = createStackNavigator();
@@ -17,11 +21,13 @@ import { Provider } from "react-redux";
 import ProductDetail from "./src/components/ProductDetail";
 
 const Drawer = createDrawerNavigator();
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     store.dispatch(loadUser());
+
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
@@ -36,7 +42,7 @@ export default function App() {
       ) : (
         <View style={styles.container}>
           <NavigationContainer>
-            <Drawer.Navigator>
+            <Drawer.Navigator initialRouteName="home">
               <Drawer.Screen
                 name="home"
                 component={Home}
@@ -47,11 +53,7 @@ export default function App() {
               <Drawer.Screen name="Shop" component={Shop} />
               <Drawer.Screen name="Register" component={RegisterForm} />
               <Drawer.Screen name="Login" component={LoginForm} />
-              <Screen
-                options={{ title: "Product details" }}
-                name="productDetail"
-                component={ProductDetail}
-              />
+              <Drawer.Screen name="productDetail" component={ProductDetail} />
             </Drawer.Navigator>
           </NavigationContainer>
         </View>

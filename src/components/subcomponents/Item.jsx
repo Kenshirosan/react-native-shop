@@ -7,7 +7,9 @@ const Item = ({ product }) => {
     <View style={styles.container}>
       <Text style={styles.title}>{product.title}</Text>
       <Image source={{ uri: product.image }} style={styles.image} />
-      <Text style={styles.description}>{product.description}</Text>
+      <Text style={styles.description}>
+        {product.description.substr(0, 60)}...
+      </Text>
       <Text style={styles.price}>{formatPrice(product.priceHT)}&euro;</Text>
     </View>
   );

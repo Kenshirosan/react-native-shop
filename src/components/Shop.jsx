@@ -1,4 +1,8 @@
 import React, { Fragment, useEffect } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+const { Navigator, Screen } = createStackNavigator();
 import { connect } from "react-redux";
 import {
   View,
@@ -15,6 +19,7 @@ import PropTypes from "prop-types";
 
 import { getProducts } from "../actions/products";
 import Item from "./subcomponents/Item";
+import ProductDetail from "./ProductDetail";
 
 const Shop = ({ navigation, products: { products }, getProducts }) => {
   useEffect(() => {
@@ -34,6 +39,7 @@ const Shop = ({ navigation, products: { products }, getProducts }) => {
     <SafeAreaView style={styles.container}>
       {products && (
         <FlatList
+          style={styles.list}
           data={products}
           contentContainerStyle={{ alignSelf: "flex-start" }}
           showsVerticalScrollIndicator={false}
@@ -49,7 +55,11 @@ const Shop = ({ navigation, products: { products }, getProducts }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     marginTop: StatusBar.currentHeight || 0,
+  },
+  list: {
+    flex: 1,
   },
   item: {
     backgroundColor: "#f9c2ff",
